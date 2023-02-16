@@ -1,16 +1,3 @@
-# Redis-Java
-Alguns exemplos de utilização do Redis usando Jedis.
+# Exemplos diversos
 
-
-redis-cli
-
-keys *
-
-get keyname
-hget keyhashname value
-hgetall keyhashname
-
-set value
-get value
-
-hset keyname field1 value1 field2 value2
+Este repositório contém alguns códigos que foram gerados para auxiliar no entendimento e funcionamento de algumas bibliotecas.

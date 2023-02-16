@@ -1,4 +1,4 @@
-package br.edu.ifsc.lased.sefemu.utils;
+package Java;
 
 import java.util.HashMap;
 import java.util.Map;
