@@ -12,6 +12,11 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisException;
 
+/**
+    * Builds the JedisPoolConfig object with the specified configuration settings.
+    * 
+    * @return the JedisPoolConfig object
+    */
 @Slf4j
 public class RedisClient {
     
@@ -23,9 +28,7 @@ public class RedisClient {
     JedisPool jedisPool = new JedisPool(poolConfig, redisHost+":"+redisPort);
     
     
-    /** 
-     * @return JedisPoolConfig
-     */
+
     private JedisPoolConfig buildPoolConfig() {
         final JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(128);
@@ -42,12 +45,13 @@ public class RedisClient {
         return poolConfig;
     } 
 
+
     /**
-     * Método que recebe uma string contendo um Json e armazena no Redis como um hashmap
+     * Adds a JSON string to Redis with the specified key.
      * 
-     * @param keyredis      chave onde o json será armazenado no redis
-     * @param stringjson    string contendo o json a ser armazenado
-     * @return              true se conseguir salvar, false se encontrar algum problema
+     * @param keyredis the key to store the JSON string in Redis
+     * @param stringjson the JSON string to be stored in Redis
+     * @return true if the JSON string was successfully added to Redis, false otherwise
      */
     public boolean addStringJsonToRedis(String keyredis, String stringjson){
         String key = keyredis;        
@@ -70,12 +74,12 @@ public class RedisClient {
         return false;
     }
 
+
     /**
-     * Método que recebe uma String contendo uma Key que está armazenada no Redis e 
-     * retorna os campos em String no formato Json
+     * Retrieves a JSON string from Redis based on the given key.
      * 
-     * @param keyredis  Chave onde está armazenado a String Json no Redis
-     * @return          uma string no formato Json com os valores da chave
+     * @param keyredis the key used to retrieve the JSON string from Redis
+     * @return the JSON string retrieved from Redis
      */
     public String getStringJsonFromRedis(String keyredis){
         Jedis jedis = jedisPool.getResource();
@@ -102,12 +106,13 @@ public class RedisClient {
 
     }
 
+
     /**
-     * Método que retorna o valor contido na chave do "objeto" Json armazenado na chave redis.
+     * Retrieves the value associated with a specific key in a Redis hash map, given the key of the hash map and the key of the JSON object within the hash map.
      * 
-     * @param keyredis  chave que está armazrnado a string json
-     * @param keyjson   chave do Json que se deseja consultar o valor
-     * @return          o valor da chave Json informada.
+     * @param keyredis the key of the Redis hash map
+     * @param keyjson the key of the JSON object within the hash map
+     * @return the value associated with the specified key, or an empty string if the key is not found or an error occurs
      */
     public String getValueFromKeyJsonRedis(String keyredis, String keyjson){
         Jedis jedis = jedisPool.getResource();
@@ -135,12 +140,12 @@ public class RedisClient {
     }
 
     /**
-     * Método para alterar um valor de uma chave Json armazenada em uma chave redis
+     * Modifies the value associated with a specific key in a Redis hash map, given the key of the hash map, the key of the JSON object, and the new value.
      * 
-     * @param keyredis  chave que está armazrnado a string json
-     * @param keyjson   chave do Json que se deseja consultar o valor
-     * @param newvalue  novo valor que a chave Json terá.
-     * @return          true se conseguir alterar, false caso ocorra algum erro.
+     * @param keyredis the key of the Redis hash map
+     * @param keyjson the key of the JSON object within the hash map
+     * @param newvalue the new value to be set
+     * @return true if the value was successfully modified, false otherwise
      */
     public boolean modifyValueFromKeyJsonRedis(String keyredis, String keyjson, String newvalue){
         Jedis jedis = jedisPool.getResource();
@@ -168,6 +173,13 @@ public class RedisClient {
         return false;
     }
 
+    /**
+     * Adds a single key-value pair to Redis.
+     * 
+     * @param keyredis the key to be added
+     * @param value the value associated with the key
+     * @return true if the key-value pair was successfully added, false otherwise
+     */
     public boolean addSingleKeyValueInRedis(String keyredis, String value){
         Jedis jedis = jedisPool.getResource();
 
@@ -191,6 +203,13 @@ public class RedisClient {
 
     }
 
+    /**
+     * Adds a HashMap to Redis with the specified key and map.
+     * 
+     * @param keyredis the key to associate with the HashMap in Redis
+     * @param map the HashMap to be added to Redis
+     * @return true if the HashMap was successfully added to Redis, false otherwise
+     */
     public boolean addHashMapInRedis(String keyredis, Map<String, String> map){
         Jedis jedis = jedisPool.getResource();
         
@@ -213,6 +232,12 @@ public class RedisClient {
 
     }
 
+    /**
+     * Retrieves a HashMap from Redis based on the given key.
+     * 
+     * @param keyredis the key used to retrieve the HashMap from Redis
+     * @return the retrieved HashMap from Redis, or null if an error occurs
+     */
     public Map<String,String> getHasMapFromRedis(String keyredis){
         Jedis jedis = jedisPool.getResource();
 

@@ -18,13 +18,14 @@ import hashlib
 class ChaveCripto():
 
     def __init__(self, chave: str):
-        """ Encapsula uma chave criptográfica
+            """ 
+            Inicializa a classe ChaveCriptografica com uma chave criptográfica.
 
-        Args:
-            chave (str): chave criptográfica na forma de string
-        """
-        self.chave_str = chave
-        self.chave_bytes = chave.encode('utf-8')
+            Args:
+                chave (str): A chave criptográfica na forma de string.
+            """
+            self.chave_str = chave
+            self.chave_bytes = chave.encode('utf-8')
 
 class Certificado():
 
@@ -112,60 +113,95 @@ class CriptoDAF:
             return False     
 
     def geraCertificado(privkey: ChaveCripto, pubkey: ChaveCripto, organizationName: str, organizationUnitName: str,
-                                countryName: str, stateName: str, localityName: str, commonName: str) -> bytes:
-                from cryptography import x509
-                from cryptography.hazmat.backends import default_backend
-                from cryptography.hazmat.primitives import hashes
-                from cryptography.hazmat.primitives import serialization
-                from cryptography.x509.oid import NameOID
-                import datetime
+                        countryName: str, stateName: str, localityName: str, commonName: str) -> bytes:
+        """
+        Generates an X.509 certificate using the provided private key, public key, and certificate details.
 
-                privkey = serialization.load_pem_private_key(
-                    privkey.chave_bytes, password=None)
-                pubkey = serialization.load_pem_public_key(pubkey.chave_bytes)
+        Args:
+            privkey (ChaveCripto): The private key used to sign the certificate.
+            pubkey (ChaveCripto): The public key associated with the certificate.
+            organizationName (str): The name of the organization.
+            organizationUnitName (str): The name of the organizational unit.
+            countryName (str): The country name.
+            stateName (str): The state or province name.
+            localityName (str): The locality or city name.
+            commonName (str): The common name for the certificate.
 
-                builder = x509.CertificateBuilder()
-                builder = builder.subject_name(x509.Name([x509.NameAttribute(NameOID.ORGANIZATION_NAME, organizationName),
-                                                        x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME,
-                                                                            organizationUnitName), x509.NameAttribute(
-                        NameOID.COUNTRY_NAME, countryName), x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, stateName),
-                                                        x509.NameAttribute(NameOID.LOCALITY_NAME, localityName),
-                                                        x509.NameAttribute(NameOID.COMMON_NAME, commonName)]))
+        Returns:
+            bytes: The X.509 certificate encoded in PEM format.
+        """
+        from cryptography import x509
+        from cryptography.hazmat.backends import default_backend
+        from cryptography.hazmat.primitives import hashes
+        from cryptography.hazmat.primitives import serialization
+        from cryptography.x509.oid import NameOID
+        import datetime
 
-                builder = builder.issuer_name(x509.Name([x509.NameAttribute(NameOID.ORGANIZATION_NAME, organizationName),
-                                                        x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME,
-                                                                            organizationUnitName), x509.NameAttribute(
-                        NameOID.COUNTRY_NAME, countryName), x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, stateName),
-                                                        x509.NameAttribute(NameOID.LOCALITY_NAME, localityName),
-                                                        x509.NameAttribute(NameOID.COMMON_NAME, commonName)]))
+        privkey = serialization.load_pem_private_key(
+            privkey.chave_bytes, password=None)
+        pubkey = serialization.load_pem_public_key(pubkey.chave_bytes)
 
-                one_day = datetime.timedelta(1, 0, 0)
-                builder = builder.not_valid_before(
-                    datetime.datetime.today() - one_day)
-                builder = builder.not_valid_after(
-                    datetime.datetime.today() + (one_day * 365 * 10))
+        builder = x509.CertificateBuilder()
+        builder = builder.subject_name(x509.Name([x509.NameAttribute(NameOID.ORGANIZATION_NAME, organizationName),
+                                                  x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME,
+                                                                    organizationUnitName), x509.NameAttribute(
+                NameOID.COUNTRY_NAME, countryName), x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, stateName),
+                                                  x509.NameAttribute(NameOID.LOCALITY_NAME, localityName),
+                                                  x509.NameAttribute(NameOID.COMMON_NAME, commonName)]))
 
-                builder = builder.serial_number(x509.random_serial_number())
-                builder = builder.public_key(pubkey)
+        builder = builder.issuer_name(x509.Name([x509.NameAttribute(NameOID.ORGANIZATION_NAME, organizationName),
+                                                 x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME,
+                                                                   organizationUnitName), x509.NameAttribute(
+                NameOID.COUNTRY_NAME, countryName), x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, stateName),
+                                                 x509.NameAttribute(NameOID.LOCALITY_NAME, localityName),
+                                                 x509.NameAttribute(NameOID.COMMON_NAME, commonName)]))
 
-                cert = builder.sign(
-                    private_key=privkey, algorithm=hashes.SHA384(), backend=default_backend())
+        one_day = datetime.timedelta(1, 0, 0)
+        builder = builder.not_valid_before(
+            datetime.datetime.today() - one_day)
+        builder = builder.not_valid_after(
+            datetime.datetime.today() + (one_day * 365 * 10))
 
-                return cert.public_bytes(serialization.Encoding.PEM)     
+        builder = builder.serial_number(x509.random_serial_number())
+        builder = builder.public_key(pubkey)
+
+        cert = builder.sign(
+            private_key=privkey, algorithm=hashes.SHA384(), backend=default_backend())
+
+        return cert.public_bytes(serialization.Encoding.PEM)
         
 class salvarEmArquivos():
     """ 
-        Método para salvar as chaves em arquivos .pem
-    """    
+    Classe responsável por salvar chaves e certificados em arquivos .pem.
+    """
 
     def __init__(self) -> None:
-         pass
+        pass
 
     def salvarChavesEmArquivoPem(nomeArquivo: str, conteudo: str):
-         with open(nomeArquivo+".pem", "w") as arquivo:
-            arquivo.write(conteudo)       
+        """
+        Salva o conteúdo das chaves em um arquivo .pem.
 
-    def salvarCertificado(certificado : bytes):
+        Args:
+            nomeArquivo (str): O nome do arquivo .pem a ser criado.
+            conteudo (str): O conteúdo das chaves a serem salvos.
+
+        Returns:
+            None
+        """
+        with open(nomeArquivo + ".pem", "w") as arquivo:
+            arquivo.write(conteudo)
+
+    def salvarCertificado(certificado: bytes):
+        """
+        Salva o certificado em um arquivo .pem.
+
+        Args:
+            certificado (bytes): O certificado a ser salvo.
+
+        Returns:
+            None
+        """
         with open('sef-cert-new.pem', 'w') as file:
             file.write(certificado.decode('utf-8'))
 

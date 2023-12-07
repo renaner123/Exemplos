@@ -13,6 +13,10 @@ import org.jose4j.lang.JoseException;
 import br.edu.ifsc.lased.daf.sefapi.utils.ChavesUtil;
 import br.edu.ifsc.lased.daf.sefapi.utils.GeradorUtil;
 
+/**
+ * This class represents an example of HMAC (Hash-based Message Authentication Code) implementation in Java.
+ * It provides a method to test the HMAC functionality.
+ */
 public class Hmac {
 
     public boolean testHmac() throws JoseException, InvalidKeySpecException, NoSuchAlgorithmException {

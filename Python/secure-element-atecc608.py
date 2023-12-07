@@ -50,7 +50,6 @@ class ConfigsTests:
         load_cryptoauthlib()
 
         self.cfg = cfg_ateccx08a_i2c_default()
-        # need to check the address and bus of the device, can change depending on the board
         self.cfg.cfg.atcai2c.slave_address = 0x6a
         self.cfg.cfg.atcai2c.bus = 0
 
