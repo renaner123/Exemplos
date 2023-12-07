@@ -112,7 +112,7 @@ class CriptoDAF:
         except:
             return False     
 
-    def geraCertificado(privkey: ChaveCripto, pubkey: ChaveCripto, organizationName: str, organizationUnitName: str,
+    def gera_certificado(privkey: ChaveCripto, pubkey: ChaveCripto, organizationName: str, organizationUnitName: str,
                         countryName: str, stateName: str, localityName: str, commonName: str) -> bytes:
         """
         Generates an X.509 certificate using the provided private key, public key, and certificate details.
@@ -170,7 +170,7 @@ class CriptoDAF:
 
         return cert.public_bytes(serialization.Encoding.PEM)
         
-class salvarEmArquivos():
+class SalvarEmArquivo():
     """ 
     Classe responsável por salvar chaves e certificados em arquivos .pem.
     """
@@ -178,7 +178,7 @@ class salvarEmArquivos():
     def __init__(self) -> None:
         pass
 
-    def salvarChavesEmArquivoPem(nomeArquivo: str, conteudo: str):
+    def salvar_chaves_em_arquivo_pem(nomeArquivo: str, conteudo: str):
         """
         Salva o conteúdo das chaves em um arquivo .pem.
 
@@ -192,7 +192,7 @@ class salvarEmArquivos():
         with open(nomeArquivo + ".pem", "w") as arquivo:
             arquivo.write(conteudo)
 
-    def salvarCertificado(certificado: bytes):
+    def salvar_certificado(certificado: bytes):
         """
         Salva o certificado em um arquivo .pem.
 
@@ -239,15 +239,15 @@ if __name__ == "__main__":
     
     private_key_new, public_Key_new = CriptoDAF.gera_chave_EC_p384()
     
-    certificado = CriptoDAF.geraCertificado(
+    certificado = CriptoDAF.gera_certificado(
         private_key_sef, public_Key_new, 'SEF', 'GESAC', 'BR', 'Santa Catarina', 'Florianopolis', 'sef.sc.gov.br')
 
-    salvarEmArquivos.salvarChavesEmArquivoPem("sef-priv-new",private_key_new.chave_str)
-    salvarEmArquivos.salvarChavesEmArquivoPem("sef-pub-new",public_Key_new.chave_str)  
+    SalvarEmArquivo.salvar_chaves_em_arquivo_pem("sef-priv-new",private_key_new.chave_str)
+    SalvarEmArquivo.salvar_chaves_em_arquivo_pem("sef-pub-new",public_Key_new.chave_str)  
 
-    # salvarEmArquivos.salvarChavesEmArquivoPem("ateste-priv-RSA-4096",private_key_sef.chave_str)
-    # salvarEmArquivos.salvarChavesEmArquivoPem("ateste-pub-RSA-4096",public_Key_sef.chave_str) 
-    salvarEmArquivos.salvarCertificado(certificado)
+    # SalvarEmArquivo.salvar_chaves_em_arquivo_pem("ateste-priv-RSA-4096",private_key_sef.chave_str)
+    # SalvarEmArquivo.salvar_chaves_em_arquivo_pem("ateste-pub-RSA-4096",public_Key_sef.chave_str) 
+    SalvarEmArquivo.salvar_certificado(certificado)
 
     #print(CriptoDAF.verifica_assinatura_EC_P384(certificado_new.conteudo_assinado,certificado_new.assinatura,public_Key_sef))
 

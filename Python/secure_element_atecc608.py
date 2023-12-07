@@ -261,7 +261,7 @@ class ConfigsTests:
         """
         return self.cfg
     
-    def verificaJWT(self, tokenJWT: str, pubkey: bytes, alg: str) -> dict:
+    def verifica_JWT(self, tokenJWT: str, pubkey: bytes, alg: str) -> dict:
         """ Método para verificação de tokens JWT
 
         Args:

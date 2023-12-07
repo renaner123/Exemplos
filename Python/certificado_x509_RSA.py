@@ -140,7 +140,7 @@ class salvarEmArquivos():
     def __init__(self) -> None:
          pass
 
-    def salvarChavesEmArquivoPem(nomeArquivo: str, conteudo: str):
+    def salvar_chaves_em_arquivo_pem(nomeArquivo: str, conteudo: str):
          with open(nomeArquivo+".pem", "w") as arquivo:
             arquivo.write(conteudo)       
 
@@ -164,11 +164,11 @@ if __name__ == "__main__":
         private_key_sef, public_Key_sef, 'SEF', 'GESAC', 'BR', 'Santa Catarina', 'Florianopolis', 'sef.sc.gov.br')
 
 
-    salvarEmArquivos.salvarChavesEmArquivoPem("sef-priv-RSA-4096",private_key_sef.chave_str)
-    salvarEmArquivos.salvarChavesEmArquivoPem("sef-pub-RSA-4096",public_Key_sef.chave_str)  
+    salvarEmArquivos.salvar_chaves_em_arquivo_pem("sef-priv-RSA-4096",private_key_sef.chave_str)
+    salvarEmArquivos.salvar_chaves_em_arquivo_pem("sef-pub-RSA-4096",public_Key_sef.chave_str)  
 
-    salvarEmArquivos.salvarChavesEmArquivoPem("ateste-priv-RSA-4096",private_key_sef.chave_str)
-    salvarEmArquivos.salvarChavesEmArquivoPem("ateste-pub-RSA-4096",public_Key_sef.chave_str) 
+    salvarEmArquivos.salvar_chaves_em_arquivo_pem("ateste-priv-RSA-4096",private_key_sef.chave_str)
+    salvarEmArquivos.salvar_chaves_em_arquivo_pem("ateste-pub-RSA-4096",public_Key_sef.chave_str) 
     salvarEmArquivos.salvarCertificado(certificado)
 
 

@@ -19,7 +19,7 @@ class Assinador():
         pass
 
 
-    def geraAssinaturaECDSA256(data: bytes, privkey: Chave) -> bytes:
+    def gera_Assinatura_ECDSA256(data: bytes, privkey: Chave) -> bytes:
         """ Método para geração de assinatura digital com o esquema ECDSA SHA256
 
         Args:
@@ -53,7 +53,7 @@ if __name__ == "__main__" :
     data =conteudo_hex.encode("utf-8")
 
     # gera a assinatura ecdsa com sha256
-    assinatura = Assinador.geraAssinaturaECDSA256(data,privkey)
+    assinatura = Assinador.gera_Assinatura_ECDSA256(data,privkey)
 
     print("Assinatura em hexadecimal:")
     print(assinatura.hex())

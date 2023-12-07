@@ -1,6 +1,6 @@
 # Exemplos diversos
 
-Este repositório contém alguns códigos que foram gerados para auxiliar no entendimento e funcionamento de algumas bibliotecas ao longo de desenvolimentos.
+Este repositório contém alguns códigos que foram gerados para auxiliar no entendimento e funcionamento de algumas bibliotecas ao longo de desenvolvimentos.
 
 
 ## Python
@@ -11,6 +11,7 @@ Este repositório contém alguns códigos que foram gerados para auxiliar no ent
 - [Calcular o  fingerprint de um certificado x.509](Python/fingerprint-x509-base64URL.py)
 - [Exemplo de utilização da lib cryptoauthlib com o elemento seguro ATECC608B](Python/secure-element-atecc608.py)
 - [Classe responsável por obter informações das interfaces de rede](Python/networks-interfaces-names-ip.py)
+- [Gerar token JWT conforme RFC 2104](Python/generate_jwt_according_rfc.py)
 
 ## Java
 
@@ -28,4 +29,4 @@ Este repositório contém alguns códigos que foram gerados para auxiliar no ent
 
 ## Links
 
-Neste [link](https://hero.page/dashboard/edit/sNuhjE2MscUQZtaZXJbK), estão alguns links que foram/são úteis para o meu dia a dia.
+Neste [link](https://hero.page/dashboard/edit/sNuhjE2MscUQZtaZXJbK) estão alguns links úteis.

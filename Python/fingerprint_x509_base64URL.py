@@ -43,7 +43,7 @@ class CriptoDAF:
         public_key = ChaveCripto(public_key.decode('utf-8'))
         return private_key, public_key
     
-    def geraCertificado(privkey: ChaveCripto, pubkey: ChaveCripto, organizationName: str, organizationUnitName: str,
+    def gera_certificado(privkey: ChaveCripto, pubkey: ChaveCripto, organizationName: str, organizationUnitName: str,
                                 countryName: str, stateName: str, localityName: str, commonName: str) -> bytes:
                 from cryptography.hazmat.backends import default_backend
                 from cryptography.x509.oid import NameOID
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     # cria um par de chaves para gerar um certificado
     private_key_new, public_Key_new = CriptoDAF.gera_chave_EC_p384()
     # cria o certificado x.509 no formato PEM
-    #certificado = CriptoDAF.geraCertificado(
+    #certificado = CriptoDAF.gera_certificado(
     #    private_key_new, public_Key_new, 'SEF', 'GESAC', 'BR', 'Santa Catarina', 'Florianopolis', 'sef.sc.gov.br')
 
     with open("sef-cert-new.pem", "r") as arquivo:
