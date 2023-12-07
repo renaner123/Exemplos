@@ -9,6 +9,8 @@ Este repositório contém alguns códigos que foram gerados para auxiliar no ent
 - [Gerar um certificado x.509 com chaves EC](Python/certificado-x509-EC.py)
 - [Gerar um certificado x.509 com chaves RSA](Python/certificado-x509-RSA.py)
 - [Calcular o  fingerprint de um certificado x.509](Python/fingerprint-x509-base64URL.py)
+- [Exemplo de utilização da lib cryptoauthlib com o elemento seguro ATECC608B](Python/secure-element-atecc608.py)
+- [Classe responsável por obter informações das interfaces de rede](Python/networks-interfaces-names-ip.py)
 
 ## Java
 
